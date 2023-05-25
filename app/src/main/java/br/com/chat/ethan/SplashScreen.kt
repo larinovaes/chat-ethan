@@ -13,16 +13,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import android.graphics.Color.parseColor
-import br.com.chat.ethan.ui.theme.ChatethanTheme
+import androidx.compose.runtime.LaunchedEffect
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import br.com.chat.ethan.ui.theme.ChatEthanTheme
+import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(name: String) {
+fun SplashScreen(
+    navController: NavController = rememberNavController()
+) {
     val customColor = Color(parseColor("#212121"))
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(customColor)
-            .padding(16.dp),
+            .background(customColor),
         contentAlignment = Alignment.Center
     ) {
         Image(
@@ -30,12 +35,16 @@ fun SplashScreen(name: String) {
             contentDescription = "My Icon"
         )
     }
+    LaunchedEffect(key1 = Unit) {
+        delay(2000)
+        navController.navigate("CHAT")
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun SplashPreview() {
-    ChatethanTheme {
-        SplashScreen("Android")
+    ChatEthanTheme {
+        SplashScreen()
     }
 }
